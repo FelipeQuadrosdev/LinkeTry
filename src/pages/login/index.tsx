@@ -9,13 +9,15 @@ export function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+ 
+
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         if (email === "" || password === "") {
             alert("Preencha todos os Campos Corretamente!!")
             return;
         }
-
+       
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 console.log("Logado com Sucesso")
@@ -23,6 +25,9 @@ export function Login() {
             })
             .catch((error) => {
                 console.log("Error ao Fazer o Login" + error)
+                if(error.code ==="auth/invalid-credential"){
+                    alert("Credenciais inválidas. Por favor, verifique seu email e senha")
+                }
             })
     }
 

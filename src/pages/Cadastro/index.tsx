@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react"
-import { Link,useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Input } from "../../Components/input"
 import { auth } from "../../services/firebaseConnection"
 import { createUserWithEmailAndPassword } from "firebase/auth"
@@ -7,13 +7,26 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 export function Cadastro() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
+
+
+    function validarSenha(password:string):string| undefined{
+        if (password.length < 6) { return "A senha deve ter pelo menos 6 caracteres."; }
+    }
 
     function handleRegister(e: FormEvent) {
         e.preventDefault();
         if (email === "" || password === "") {
             alert("Preencha todos os Campos Corretamente!!")
             return;
+        }
+
+        const senhaErro = validarSenha(password);
+        if (senhaErro) {
+            setError(senhaErro);
+            return;
+
         }
 
         createUserWithEmailAndPassword(auth, email, password)
@@ -48,7 +61,8 @@ export function Cadastro() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-
+                
+                {error && <p className="text-red-500">{error}</p>}
                 <button
                     type="submit"
                     className="h-9 bg-blue-600 rounded border-0 text-lg font-medium text-white">
