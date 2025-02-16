@@ -15,6 +15,9 @@ Este é um projeto de gerenciamento de liketry é para armazenar todos seus link
 
 -**Firestore**: Banco de dados NoSQL para armazenamento das tarefas.
 
+-**React-router-dom**: Bibilhoteza para avegação de tela.
+
+-**React-icons**: bibilhoteca para utilizar os icons.
 
 ## Funcionalidades
 -Cadastro, edição e exclusão de tarefas.
